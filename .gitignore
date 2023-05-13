@@ -1,0 +1,33 @@
+# Build output
+knowledge_graph_ABOX/target/
+knowledge_graph_ABOX/*.class
+knowledge_graph_ABOX/*.jar
+knowledge_graph_ABOX/*.war
+knowledge_graph_ABOX/*.ear
+knowledge_graph_ABOX/*.log
+knowledge_graph_ABOX/*.tmp
+
+# Dependencies
+knowledge_graph_ABOX/node_modules/
+knowledge_graph_ABOX/bower_components/
+knowledge_graph_ABOX/.gradle/
+knowledge_graph_ABOX/.idea/
+.idea/
+# IDE and editor files
+knowledge_graph_ABOX/*.iml
+knowledge_graph_ABOX/*.ipr
+knowledge_graph_ABOX/*.iws
+knowledge_graph_ABOX/.vscode/
+knowledge_graph_ABOX/.idea/
+
+# Operating system files
+knowledge_graph_ABOX/.DS_Store
+knowledge_graph_ABOX/Thumbs.db
+
+# Personal files
+knowledge_graph_ABOX/*.bak
+knowledge_graph_ABOX/*.swp
+knowledge_graph_ABOX/*.DS_Store
+
+# Configuration files
+knowledge_graph_ABOX/.env
