@@ -1,0 +1,769 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final">
+    <Prefix name="" IRI="http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="/AcceptedPaper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Area"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Author"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Chair"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Conference"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/ConferenceProceedings"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/DemoPaper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Editor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/ExpertGroup"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/FullPaper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Journal"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/JournalVolume"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/NegativeReview"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Paper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/PositiveReview"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Poster"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/RegularConference"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Review"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Reviewer"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/ShortPaper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/SubmittedPaper"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Symposium"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Venue"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="/Workshop"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/assignsReviewer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/beingHandledBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/chairAssignsReviewer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/editorAssignsReviewer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/handledByChair"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/handledByEditor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/handles"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/handlesConference"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/handlesJournal"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/hasAuthor"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/hasNegativeReviewSubmitted"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/hasPositiveReviewSubmitted"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/hasReviewSubmitted"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/hasReviewer"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/hasSubmitted"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/includedIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/includedInConferenceProceedings"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/includedInJournalVolume"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/isRelatedTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/isSubmitted"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/paperIsRelatedTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/submitsNegativeReview"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/submitsPositiveReview"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/submitsReview"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="/venueIsRelatedTo"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/areaHasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/conferenceProceedingsHasYear"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasDecision"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasNegativeDecision"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasPositiveDecision"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasText"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasTitle"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/hasYear"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/journalVolumeHasYear"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/personHasName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="/venueHasName"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="/AcceptedPaper"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/SubmittedPaper"/>
+            <ObjectAllValuesFrom>
+                <ObjectProperty IRI="/hasPositiveReviewSubmitted"/>
+                <Class IRI="/PositiveReview"/>
+            </ObjectAllValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Conference"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/Venue"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/handledByChair"/>
+                <Class IRI="/Chair"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Journal"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/Venue"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/handledByEditor"/>
+                <Class IRI="/Editor"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Review"/>
+        <ObjectUnionOf>
+            <Class IRI="/NegativeReview"/>
+            <Class IRI="/PositiveReview"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Reviewer"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/Person"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/submitsReview"/>
+                <Class IRI="/Review"/>
+            </ObjectSomeValuesFrom>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/SubmittedPaper"/>
+        <ObjectIntersectionOf>
+            <Class IRI="/Paper"/>
+            <ObjectSomeValuesFrom>
+                <ObjectProperty IRI="/isSubmitted"/>
+                <Class IRI="/Venue"/>
+            </ObjectSomeValuesFrom>
+            <ObjectMinCardinality cardinality="2">
+                <ObjectProperty IRI="/hasReviewer"/>
+                <Class IRI="/Reviewer"/>
+            </ObjectMinCardinality>
+        </ObjectIntersectionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="/Venue"/>
+        <ObjectUnionOf>
+            <Class IRI="/Conference"/>
+            <Class IRI="/Journal"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="/Area"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/areaHasName"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Author"/>
+        <Class IRI="/Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Chair"/>
+        <Class IRI="/Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/ConferenceProceedings"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/conferenceProceedingsHasYear"/>
+            <Datatype abbreviatedIRI="xsd:int"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/DemoPaper"/>
+        <Class IRI="/Paper"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Editor"/>
+        <Class IRI="/Person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/ExpertGroup"/>
+        <Class IRI="/Conference"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/FullPaper"/>
+        <Class IRI="/Paper"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/JournalVolume"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/journalVolumeHasYear"/>
+            <Datatype abbreviatedIRI="xsd:int"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/NegativeReview"/>
+        <Class IRI="/Review"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/NegativeReview"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/hasNegativeDecision"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Paper"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="/hasAuthor"/>
+            <Class IRI="/Author"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Paper"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="/isRelatedTo"/>
+            <Class IRI="/Area"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Paper"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/hasTitle"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Person"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/personHasName"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/PositiveReview"/>
+        <Class IRI="/Review"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/PositiveReview"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/hasPositiveDecision"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Poster"/>
+        <Class IRI="/Paper"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Poster"/>
+        <ObjectAllValuesFrom>
+            <ObjectProperty IRI="/isSubmitted"/>
+            <Class IRI="/Conference"/>
+        </ObjectAllValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/RegularConference"/>
+        <Class IRI="/Conference"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Review"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/hasText"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/ShortPaper"/>
+        <Class IRI="/Paper"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Symposium"/>
+        <Class IRI="/Conference"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Venue"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="/isRelatedTo"/>
+            <Class IRI="/Area"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Venue"/>
+        <DataSomeValuesFrom>
+            <DataProperty IRI="/venueHasName"/>
+            <Datatype abbreviatedIRI="xsd:string"/>
+        </DataSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="/Workshop"/>
+        <Class IRI="/Conference"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="/Conference"/>
+        <Class IRI="/Journal"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/DemoPaper"/>
+        <Class IRI="/FullPaper"/>
+        <Class IRI="/Poster"/>
+        <Class IRI="/ShortPaper"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/ExpertGroup"/>
+        <Class IRI="/RegularConference"/>
+        <Class IRI="/Symposium"/>
+        <Class IRI="/Workshop"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/NegativeReview"/>
+        <Class IRI="/PositiveReview"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="/Review"/>
+        <Class IRI="/Venue"/>
+    </DisjointClasses>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/chairAssignsReviewer"/>
+        <ObjectProperty IRI="/assignsReviewer"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/editorAssignsReviewer"/>
+        <ObjectProperty IRI="/assignsReviewer"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/handledByChair"/>
+        <ObjectProperty IRI="/beingHandledBy"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/handledByEditor"/>
+        <ObjectProperty IRI="/beingHandledBy"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/handlesConference"/>
+        <ObjectProperty IRI="/handles"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/handlesJournal"/>
+        <ObjectProperty IRI="/handles"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/hasNegativeReviewSubmitted"/>
+        <ObjectProperty IRI="/hasReviewSubmitted"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/hasPositiveReviewSubmitted"/>
+        <ObjectProperty IRI="/hasReviewSubmitted"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/includedInConferenceProceedings"/>
+        <ObjectProperty IRI="/includedIn"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/includedInJournalVolume"/>
+        <ObjectProperty IRI="/includedIn"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/paperIsRelatedTo"/>
+        <ObjectProperty IRI="/isRelatedTo"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/submitsNegativeReview"/>
+        <ObjectProperty IRI="/submitsReview"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/submitsPositiveReview"/>
+        <ObjectProperty IRI="/submitsReview"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="/venueIsRelatedTo"/>
+        <ObjectProperty IRI="/isRelatedTo"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="/beingHandledBy"/>
+        <ObjectProperty IRI="/handles"/>
+    </InverseObjectProperties>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="/handledByChair"/>
+        <ObjectProperty IRI="/handlesConference"/>
+    </InverseObjectProperties>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/chairAssignsReviewer"/>
+        <Class IRI="/Chair"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/editorAssignsReviewer"/>
+        <Class IRI="/Editor"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/handledByChair"/>
+        <Class IRI="/Conference"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/handledByEditor"/>
+        <Class IRI="/Journal"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/handlesConference"/>
+        <Class IRI="/Chair"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/handlesJournal"/>
+        <Class IRI="/Editor"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/hasAuthor"/>
+        <Class IRI="/Paper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/hasNegativeReviewSubmitted"/>
+        <Class IRI="/SubmittedPaper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/hasPositiveReviewSubmitted"/>
+        <Class IRI="/SubmittedPaper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/hasReviewSubmitted"/>
+        <Class IRI="/SubmittedPaper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/hasReviewer"/>
+        <Class IRI="/SubmittedPaper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/hasSubmitted"/>
+        <Class IRI="/Author"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/includedInConferenceProceedings"/>
+        <Class IRI="/AcceptedPaper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/includedInJournalVolume"/>
+        <Class IRI="/AcceptedPaper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/isSubmitted"/>
+        <Class IRI="/Paper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/paperIsRelatedTo"/>
+        <Class IRI="/Paper"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/submitsNegativeReview"/>
+        <Class IRI="/Reviewer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/submitsPositiveReview"/>
+        <Class IRI="/Reviewer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/submitsReview"/>
+        <Class IRI="/Reviewer"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="/venueIsRelatedTo"/>
+        <Class IRI="/Venue"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/chairAssignsReviewer"/>
+        <Class IRI="/Reviewer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/editorAssignsReviewer"/>
+        <Class IRI="/Reviewer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/handledByChair"/>
+        <Class IRI="/Chair"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/handledByEditor"/>
+        <Class IRI="/Editor"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/handlesConference"/>
+        <Class IRI="/Conference"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/handlesJournal"/>
+        <Class IRI="/Journal"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/hasAuthor"/>
+        <Class IRI="/Person"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/hasNegativeReviewSubmitted"/>
+        <Class IRI="/NegativeReview"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/hasPositiveReviewSubmitted"/>
+        <Class IRI="/PositiveReview"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/hasReviewSubmitted"/>
+        <Class IRI="/Review"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/hasReviewer"/>
+        <Class IRI="/Reviewer"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/hasSubmitted"/>
+        <Class IRI="/Paper"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/includedInConferenceProceedings"/>
+        <Class IRI="/ConferenceProceedings"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/includedInJournalVolume"/>
+        <Class IRI="/JournalVolume"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/isSubmitted"/>
+        <Class IRI="/Venue"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/paperIsRelatedTo"/>
+        <Class IRI="/Area"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/submitsNegativeReview"/>
+        <Class IRI="/NegativeReview"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/submitsPositiveReview"/>
+        <Class IRI="/PositiveReview"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/submitsReview"/>
+        <Class IRI="/Review"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="/venueIsRelatedTo"/>
+        <Class IRI="/Area"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/areaHasName"/>
+        <DataProperty IRI="/hasName"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/conferenceProceedingsHasYear"/>
+        <DataProperty IRI="/hasYear"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/hasNegativeDecision"/>
+        <DataProperty IRI="/hasDecision"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/hasPositiveDecision"/>
+        <DataProperty IRI="/hasDecision"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/journalVolumeHasYear"/>
+        <DataProperty IRI="/hasYear"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/personHasName"/>
+        <DataProperty IRI="/hasName"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="/venueHasName"/>
+        <DataProperty IRI="/hasName"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty IRI="/areaHasName"/>
+        <Class IRI="/Area"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/conferenceProceedingsHasYear"/>
+        <Class IRI="/ConferenceProceedings"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasNegativeDecision"/>
+        <Class IRI="/NegativeReview"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasPositiveDecision"/>
+        <Class IRI="/PositiveReview"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasText"/>
+        <Class IRI="/Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/hasTitle"/>
+        <Class IRI="/Paper"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/journalVolumeHasYear"/>
+        <Class IRI="/JournalVolume"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/personHasName"/>
+        <Class IRI="/Person"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="/venueHasName"/>
+        <Class IRI="/Venue"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="/areaHasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/conferenceProceedingsHasYear"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasNegativeDecision"/>
+        <DataOneOf>
+            <Literal>Rejected</Literal>
+        </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasPositiveDecision"/>
+        <DataOneOf>
+            <Literal>Rejected</Literal>
+        </DataOneOf>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasText"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/hasTitle"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/journalVolumeHasYear"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/personHasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="/venueHasName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi -->
+

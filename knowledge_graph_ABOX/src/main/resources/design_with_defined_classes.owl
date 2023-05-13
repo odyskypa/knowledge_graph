@@ -1,0 +1,509 @@
+@prefix : <http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/> .
+
+<http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final#chairAssignsReviewer
+:chairAssignsReviewer rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :assignsReviewer ;
+                      rdfs:domain :Chair ;
+                      rdfs:range :Reviewer .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final#editorAssignsReviewer
+:editorAssignsReviewer rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :assignsReviewer ;
+                       rdfs:domain :Editor ;
+                       rdfs:range :Reviewer .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/assignsReviewer
+:assignsReviewer rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/beingHandledBy
+:beingHandledBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf :handles .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/handledByChair
+:handledByChair rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :beingHandledBy ;
+                owl:inverseOf :handlesConference ;
+                rdfs:domain :Conference ;
+                rdfs:range :Chair .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/handledByEditor
+:handledByEditor rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :beingHandledBy ;
+                 rdfs:domain :Journal ;
+                 rdfs:range :Editor .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/handles
+:handles rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/handlesConference
+:handlesConference rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :handles ;
+                   rdfs:domain :Chair ;
+                   rdfs:range :Conference .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/handlesJournal
+:handlesJournal rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :handles ;
+                rdfs:domain :Editor ;
+                rdfs:range :Journal .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasAuthor
+:hasAuthor rdf:type owl:ObjectProperty ;
+           rdfs:domain :Paper ;
+           rdfs:range :Person .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasNegativeReviewSubmitted
+:hasNegativeReviewSubmitted rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :hasReviewSubmitted ;
+                            rdfs:domain :SubmittedPaper ;
+                            rdfs:range :NegativeReview .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasPositiveReviewSubmitted
+:hasPositiveReviewSubmitted rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf :hasReviewSubmitted ;
+                            rdfs:domain :SubmittedPaper ;
+                            rdfs:range :PositiveReview .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasReviewSubmitted
+:hasReviewSubmitted rdf:type owl:ObjectProperty ;
+                    rdfs:domain :SubmittedPaper ;
+                    rdfs:range :Review .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasReviewer
+:hasReviewer rdf:type owl:ObjectProperty ;
+             rdfs:domain :SubmittedPaper ;
+             rdfs:range :Reviewer .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasSubmitted
+:hasSubmitted rdf:type owl:ObjectProperty ;
+              rdfs:domain :Author ;
+              rdfs:range :Paper .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/includedIn
+:includedIn rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/includedInConferenceProceedings
+:includedInConferenceProceedings rdf:type owl:ObjectProperty ;
+                                 rdfs:subPropertyOf :includedIn ;
+                                 rdfs:domain :AcceptedPaper ;
+                                 rdfs:range :ConferenceProceedings .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/includedInJournalVolume
+:includedInJournalVolume rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :includedIn ;
+                         rdfs:domain :AcceptedPaper ;
+                         rdfs:range :JournalVolume .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/isRelatedTo
+:isRelatedTo rdf:type owl:ObjectProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/isSubmitted
+:isSubmitted rdf:type owl:ObjectProperty ;
+             rdfs:domain :Paper ;
+             rdfs:range :Venue .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/paperIsRelatedTo
+:paperIsRelatedTo rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :isRelatedTo ;
+                  rdfs:domain :Paper ;
+                  rdfs:range :Area .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/submitsNegativeReview
+:submitsNegativeReview rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :submitsReview ;
+                       rdfs:domain :Reviewer ;
+                       rdfs:range :NegativeReview .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/submitsPositiveReview
+:submitsPositiveReview rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf :submitsReview ;
+                       rdfs:domain :Reviewer ;
+                       rdfs:range :PositiveReview .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/submitsReview
+:submitsReview rdf:type owl:ObjectProperty ;
+               rdfs:domain :Reviewer ;
+               rdfs:range :Review .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/venueIsRelatedTo
+:venueIsRelatedTo rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :isRelatedTo ;
+                  rdfs:domain :Venue ;
+                  rdfs:range :Area .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/areaHasName
+:areaHasName rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :hasName ;
+             rdfs:domain :Area ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/conferenceProceedingsHasYear
+:conferenceProceedingsHasYear rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf :hasYear ;
+                              rdfs:domain :ConferenceProceedings ;
+                              rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasDecision
+:hasDecision rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasName
+:hasName rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasNegativeDecision
+:hasNegativeDecision rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :hasDecision ;
+                     rdfs:domain :NegativeReview ;
+                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                  owl:oneOf [ rdf:type rdf:List ;
+                                              rdf:first "Rejected" ;
+                                              rdf:rest rdf:nil
+                                            ]
+                                ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasPositiveDecision
+:hasPositiveDecision rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf :hasDecision ;
+                     rdfs:domain :PositiveReview ;
+                     rdfs:range [ rdf:type rdfs:Datatype ;
+                                  owl:oneOf [ rdf:type rdf:List ;
+                                              rdf:first "Rejected" ;
+                                              rdf:rest rdf:nil
+                                            ]
+                                ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasText
+:hasText rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Review ;
+         rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Paper ;
+          rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/hasYear
+:hasYear rdf:type owl:DatatypeProperty .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/journalVolumeHasYear
+:journalVolumeHasYear rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :hasYear ;
+                      rdfs:domain :JournalVolume ;
+                      rdfs:range xsd:int .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/personHasName
+:personHasName rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :hasName ;
+               rdfs:domain :Person ;
+               rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/venueHasName
+:venueHasName rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :hasName ;
+              rdfs:domain :Venue ;
+              rdfs:range xsd:string .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/AcceptedPaper
+:AcceptedPaper rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :SubmittedPaper
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasPositiveReviewSubmitted ;
+                                                            owl:allValuesFrom :PositiveReview
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Area
+:Area rdf:type owl:Class ;
+      rdfs:subClassOf [ rdf:type owl:Restriction ;
+                        owl:onProperty :areaHasName ;
+                        owl:someValuesFrom xsd:string
+                      ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Author
+:Author rdf:type owl:Class ;
+        rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Chair
+:Chair rdf:type owl:Class ;
+       rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Conference
+:Conference rdf:type owl:Class ;
+            owl:equivalentClass [ owl:intersectionOf ( :Venue
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty :handledByChair ;
+                                                         owl:someValuesFrom :Chair
+                                                       ]
+                                                     ) ;
+                                  rdf:type owl:Class
+                                ] ;
+            owl:disjointWith :Journal .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/ConferenceProceedings
+:ConferenceProceedings rdf:type owl:Class ;
+                       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                         owl:onProperty :conferenceProceedingsHasYear ;
+                                         owl:someValuesFrom xsd:int
+                                       ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/DemoPaper
+:DemoPaper rdf:type owl:Class ;
+           rdfs:subClassOf :Paper .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Editor
+:Editor rdf:type owl:Class ;
+        rdfs:subClassOf :Person .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/ExpertGroup
+:ExpertGroup rdf:type owl:Class ;
+             rdfs:subClassOf :Conference .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/FullPaper
+:FullPaper rdf:type owl:Class ;
+           rdfs:subClassOf :Paper .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Journal
+:Journal rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :Venue
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :handledByEditor ;
+                                                      owl:someValuesFrom :Editor
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/JournalVolume
+:JournalVolume rdf:type owl:Class ;
+               rdfs:subClassOf [ rdf:type owl:Restriction ;
+                                 owl:onProperty :journalVolumeHasYear ;
+                                 owl:someValuesFrom xsd:int
+                               ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/NegativeReview
+:NegativeReview rdf:type owl:Class ;
+                rdfs:subClassOf :Review ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :hasNegativeDecision ;
+                                  owl:someValuesFrom xsd:string
+                                ] ;
+                owl:disjointWith :PositiveReview .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Paper
+:Paper rdf:type owl:Class ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasAuthor ;
+                         owl:someValuesFrom :Author
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :isRelatedTo ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Area
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :hasTitle ;
+                         owl:someValuesFrom xsd:string
+                       ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Person
+:Person rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :personHasName ;
+                          owl:someValuesFrom xsd:string
+                        ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/PositiveReview
+:PositiveReview rdf:type owl:Class ;
+                rdfs:subClassOf :Review ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :hasPositiveDecision ;
+                                  owl:someValuesFrom xsd:string
+                                ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Poster
+:Poster rdf:type owl:Class ;
+        rdfs:subClassOf :Paper ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :isSubmitted ;
+                          owl:allValuesFrom :Conference
+                        ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/RegularConference
+:RegularConference rdf:type owl:Class ;
+                   rdfs:subClassOf :Conference .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Review
+:Review rdf:type owl:Class ;
+        owl:equivalentClass [ rdf:type owl:Class ;
+                              owl:unionOf ( :NegativeReview
+                                            :PositiveReview
+                                          )
+                            ] ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasText ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        owl:disjointWith :Venue .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Reviewer
+:Reviewer rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :Person
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :submitsReview ;
+                                                       owl:someValuesFrom :Review
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/ShortPaper
+:ShortPaper rdf:type owl:Class ;
+            rdfs:subClassOf :Paper .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/SubmittedPaper
+:SubmittedPaper rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( :Paper
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :isSubmitted ;
+                                                             owl:someValuesFrom :Venue
+                                                           ]
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty :hasReviewer ;
+                                                             owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                             owl:onClass :Reviewer
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Symposium
+:Symposium rdf:type owl:Class ;
+           rdfs:subClassOf :Conference .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Venue
+:Venue rdf:type owl:Class ;
+       owl:equivalentClass [ rdf:type owl:Class ;
+                             owl:unionOf ( :Conference
+                                           :Journal
+                                         )
+                           ] ;
+       rdfs:subClassOf [ rdf:type owl:Restriction ;
+                         owl:onProperty :isRelatedTo ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Area
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :venueHasName ;
+                         owl:someValuesFrom xsd:string
+                       ] .
+
+
+###  http://www.semanticweb.org/odykypar/ontologies/2023/4/sdm-final/Workshop
+:Workshop rdf:type owl:Class ;
+          rdfs:subClassOf :Conference .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :DemoPaper
+                :FullPaper
+                :Poster
+                :ShortPaper
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :ExpertGroup
+                :RegularConference
+                :Symposium
+                :Workshop
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.25.2023-02-15T19:15:49Z) https://github.com/owlcs/owlapi
