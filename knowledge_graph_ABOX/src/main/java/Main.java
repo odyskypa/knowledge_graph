@@ -15,10 +15,10 @@ public class Main {
         System.out.println("Base URL: " + baseURL);
 
         // Create the ABox ontology
-        // OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_RULE_INF, tboxModel);
+         OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_RULE_INF, tboxModel);
 
         // Load data from instances.csv and create individuals in the ABox
-//        ABoxCreator.loadABoxData(aboxModel, "/instances.csv", baseURL);
+        ABoxCreator.loadABoxData(aboxModel, "/abox_data.csv", baseURL);
 
         // Save the ABox ontology to a file
 //        String namespaceURI = tboxModel.getNsPrefixURI("ex");  // Retrieve the namespace URI from the TBox model
