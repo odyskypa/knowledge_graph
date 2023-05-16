@@ -97,72 +97,81 @@ public class ABoxCreator {
                     paper = tboxModel.getResource(baseURL.concat(TBoxVariables.POSTER));
                 }
 
+                // all papers are considered SubmittedPaper
                 // This block refers to all the rows of the same paper.
                 if (paperID.equals(previousPaperID)) {
+                    if (isAccepted){
+                        if (isConference) {
+                            System.out.println("Same paper accepted conference");
+                        } else{
+                            System.out.println("Same paper accepted journal");
+                        }
 
-
-
-
-
-
+                    } else{
+                        if (isConference) {
+                            System.out.println("Same paper rejected conference");
+                        } else{
+                            System.out.println("Same paper rejected journal");
+                        }
+                    }
                     previousPaperID = paperID; // change previousPaperID to show the one that inserted now
 
                 } else {
+                    if (isAccepted){
+                        if (isConference) {
+                            System.out.println("New paper accepted conference");
 
+                            // create Author
+
+                            // create Area
+
+                            // create Positive Review
+
+                            // create Venue (sourceID)
+
+                            // create reviewer 1 and 2
+
+
+
+                            Resource paperIndividual = aboxModel.createResource(paper + "#" + paperID);
+
+                            paperIndividual.addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_TITLE), paperTitle)
+                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_AUTHOR), authorID)
+                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.IS_RELATED_TO), areaID)
+                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_POSITIVE_REVIEW_SUBMITTED), reviewID)
+                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.IS_SUBMITTED), sourceID)
+                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_REVIEWER), reviewer1ID)
+                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_REVIEWER), reviewer2ID);
+
+                            /*// Create an individual for the author and link it to the paper
+                            Resource authorIndividual = aboxModel.createResource(baseURL + "#" + authorID)
+                                    .addProperty(aboxModel.createProperty(baseURL, "authorName"), authorName);
+
+                            // Link the author to the paper
+                            paperIndividual.addProperty(aboxModel.createProperty(baseURL, "hasAuthor"), authorIndividual);
+
+                            paperIndividual.addProperty(aboxModel.createProperty(baseURL, "reviewer1"), reviewer1)
+                                    .addProperty(aboxModel.createProperty(baseURL, "reviewer2"), reviewer2)
+                                    .addProperty(aboxModel.createProperty(baseURL, "handlerID"), handlerID)
+                                    .addProperty(aboxModel.createProperty(baseURL, "handler"), handler)
+                                    .addProperty(aboxModel.createProperty(baseURL, "handlerType"), handlerType)
+                                    .addProperty(aboxModel.createProperty(baseURL, "areaID"), areaID)
+                                    .addProperty(aboxModel.createProperty(baseURL, "areas"), area)
+                                    .addProperty(aboxModel.createProperty(baseURL, "reviewID"), reviewID)
+                                    .addProperty(aboxModel.createProperty(baseURL, "reviewerDecision"), reviewerDecision)
+                                    .addProperty(aboxModel.createProperty(baseURL, "reviewerText"), reviewerText);*/
+                        } else{
+                            System.out.println("New paper accepted journal");
+                        }
+
+                    } else{
+                        if (isConference) {
+                            System.out.println("New paper rejected conference");
+                        } else{
+                            System.out.println("New paper rejected journal");
+                        }
+                    }
                     previousPaperID = paperID;
-
-
-                }
-                // proceedingVolume = "No"  -> Review Decision = "Rejected"
-                // proceedingVolume != "No" -> proceedingVolume contains Conference Proceeding or Journal Volume
-                // and proceedingVolumeID the ID of Conference Proceeding or Journal Volume respectively
-                if (proceedingVolume.equals("No")) {
-                    System.out.println("Publication is 'No'");
-                } else {
-                    System.out.println("Publication is not 'No'");
-                }
-
-                if (reviewerDecision.equals("Rejected")) {
-                    System.out.println("Submitted Paper is Rejected");
-                } else {
-                    System.out.println("Publication is not 'No'");
-                }
-
-
-
-                if (!resourceExist(aboxModel, baseURL, "Paper", paperID)) {
-                    System.out.println("Resource does not exists!");
-
-                    Resource paperIndividual = aboxModel.createResource(baseURL + "/Paper" + "#" + paperID)
-                            .addProperty(aboxModel.createProperty(baseURL, "hasTitle"), paperTitle)
-                            .addProperty(aboxModel.createProperty(baseURL, "hasAuthor"), authorID)
-                            .addProperty(aboxModel.createProperty(baseURL, "conferenceType"), conferenceType)
-                            .addProperty(aboxModel.createProperty(baseURL, "sourceID"), sourceID)
-                            .addProperty(aboxModel.createProperty(baseURL, "source"), source)
-                            .addProperty(aboxModel.createProperty(baseURL, "year"), Integer.toString(year))
-                            .addProperty(aboxModel.createProperty(baseURL, "documentType"), documentType)
-                            .addProperty(aboxModel.createProperty(baseURL, "volumeProceeding"), volumeProceeding);
-
-                    // Create an individual for the author and link it to the paper
-                    Resource authorIndividual = aboxModel.createResource(baseURL + "#" + authorID)
-                            .addProperty(aboxModel.createProperty(baseURL, "authorName"), authorName);
-
-                    // Link the author to the paper
-                    paperIndividual.addProperty(aboxModel.createProperty(baseURL, "hasAuthor"), authorIndividual);
-
-                    paperIndividual.addProperty(aboxModel.createProperty(baseURL, "reviewer1"), reviewer1)
-                            .addProperty(aboxModel.createProperty(baseURL, "reviewer2"), reviewer2)
-                            .addProperty(aboxModel.createProperty(baseURL, "handlerID"), handlerID)
-                            .addProperty(aboxModel.createProperty(baseURL, "handler"), handler)
-                            .addProperty(aboxModel.createProperty(baseURL, "handlerType"), handlerType)
-                            .addProperty(aboxModel.createProperty(baseURL, "areaID"), areaID)
-                            .addProperty(aboxModel.createProperty(baseURL, "areas"), area)
-                            .addProperty(aboxModel.createProperty(baseURL, "reviewID"), reviewID)
-                            .addProperty(aboxModel.createProperty(baseURL, "reviewerDecision"), reviewerDecision)
-                            .addProperty(aboxModel.createProperty(baseURL, "reviewerText"), reviewerText);
-
-                } else {
-                    System.out.println("Resource exist!");
                 }
             }
         } catch (IOException e) {
@@ -227,11 +236,6 @@ public class ABoxCreator {
         columns.add(sb.toString().trim());
 
         return columns.toArray(new String[0]);
-    }
-
-    public static boolean resourceExist(OntModel aboxModel, String baseURL, String className, String id) {
-        String resourceURI = baseURL + "/" + className + "#" + id;
-        return aboxModel.containsResource(aboxModel.getResource(resourceURI));
     }
 
     public static String prepare_str(String str) {
@@ -392,6 +396,6 @@ public class ABoxCreator {
         public static final String JOURNAL = "Journal";
         public static final String SYMPOSIUM = "Symposium";
         public static final String PERSON = "Person";
-        public static final String REVIEWER = "Reviewer";
+        public static final String REVIEWER = "Reviewer/";
     }
 }

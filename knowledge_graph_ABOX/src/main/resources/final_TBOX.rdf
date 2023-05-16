@@ -483,7 +483,7 @@
     <!-- http://www.semanticweb.org/sdm/DemoPaper -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/DemoPaper">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/Paper"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/AcceptedPaper"/>
     </owl:Class>
     
 
@@ -507,7 +507,7 @@
     <!-- http://www.semanticweb.org/sdm/FullPaper -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/FullPaper">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/Paper"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/AcceptedPaper"/>
     </owl:Class>
     
 
@@ -561,25 +561,25 @@
     <!-- http://www.semanticweb.org/sdm/Paper -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/Paper">
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/hasAuthor"/>
-                <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/sdm/Author"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/isRelatedTo"/>
-                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
-                <owl:onClass rdf:resource="http://www.semanticweb.org/sdm/Area"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
-        <rdfs:subClassOf>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/hasTitle"/>
-                <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
-            </owl:Restriction>
-        </rdfs:subClassOf>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/hasAuthor"/>
+                        <owl:someValuesFrom rdf:resource="http://www.semanticweb.org/sdm/Author"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/isRelatedTo"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="http://www.semanticweb.org/sdm/Area"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/hasTitle"/>
+                        <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
     </owl:Class>
     
 
@@ -587,12 +587,12 @@
     <!-- http://www.semanticweb.org/sdm/Person -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/Person">
-        <rdfs:subClassOf>
+        <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/personHasName"/>
                 <owl:someValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
             </owl:Restriction>
-        </rdfs:subClassOf>
+        </owl:equivalentClass>
     </owl:Class>
     
 
@@ -614,7 +614,7 @@
     <!-- http://www.semanticweb.org/sdm/Poster -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/Poster">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/Paper"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/AcceptedPaper"/>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/isSubmitted"/>
@@ -676,7 +676,7 @@
     <!-- http://www.semanticweb.org/sdm/ShortPaper -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/ShortPaper">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/Paper"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/AcceptedPaper"/>
     </owl:Class>
     
 
