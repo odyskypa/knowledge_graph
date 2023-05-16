@@ -2,49 +2,30 @@ import org.apache.jena.ontology.OntModel;
 import org.apache.jena.ontology.OntModelSpec;
 import org.apache.jena.rdf.model.ModelFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
-
+import ABoxCreator.ABoxCreator;
 public class Main {
     public static void main(String[] args) {
-
         System.out.println("Hello, world!");
 
         // Load the TBox ontology from the resources folder
-        //OntModel tboxModel = loadTBoxFromResource("/design_with_defined_classes.owl");
-        OntModel tboxModel = loadTBoxFromResource("/tbox.rdf");
+        OntModel tboxModel = ABoxCreator.loadTBoxFromResource("/final_TBOX.rdf");
+
+        // Retrieve the base URL from the TBox ontology
+        String baseURL = ABoxCreator.getBaseURL(tboxModel);
+        System.out.println("Base URL: " + baseURL);
 
         // Create the ABox ontology
-        OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_RULE_INF, tboxModel);
+        // OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_RULE_INF, tboxModel);
 
-        System.out.println("We have aboxModel!");
-
-
-        // Add some individuals and statements to the ABox ontology
-        // ...
+        // Load data from instances.csv and create individuals in the ABox
+//        ABoxCreator.loadABoxData(aboxModel, "/instances.csv", baseURL);
 
         // Save the ABox ontology to a file
-        // ...
+//        String namespaceURI = tboxModel.getNsPrefixURI("ex");  // Retrieve the namespace URI from the TBox model
+
+        // Save the ABox ontology to a file
+//        ABoxCreator.saveABoxOntology(aboxModel, "abox.rdf");
+
+        System.out.println("We have aboxModel!");
     }
-
-    public static OntModel loadTBoxFromResource(String resourcePath) {
-        // Get the input stream for the resource file
-        InputStream in = Main.class.getResourceAsStream(resourcePath);
-
-        // Create the ontology model
-        OntModel tboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
-
-        // Load the ontology from the input stream
-        tboxModel.read(in, null);
-
-        // Close the input stream
-        try {
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return tboxModel;
-    }
-
 }
