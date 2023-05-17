@@ -325,7 +325,7 @@
                 <owl:oneOf>
                     <rdf:Description>
                         <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
-                        <rdf:first>Rejected</rdf:first>
+                        <rdf:first>Accepted</rdf:first>
                         <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
                     </rdf:Description>
                 </owl:oneOf>
@@ -397,6 +397,66 @@
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    
+
+
+    <!-- http://www.semanticweb.org/sdm#DemoPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sdm#DemoPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/AcceptedPaper"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/sdm/DemoPaper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/sdm#FullPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sdm#FullPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm#RejectedPaper"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/sdm/FullPaper"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/sdm#Poster -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sdm#Poster">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm#RejectedPaper"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/isSubmitted"/>
+                <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/sdm/Conference"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/sdm/Poster"/>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/sdm#RejectedPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sdm#RejectedPaper">
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="http://www.semanticweb.org/sdm/SubmittedPaper"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="http://www.semanticweb.org/sdm/hasPositiveReviewSubmitted"/>
+                        <owl:allValuesFrom rdf:resource="http://www.semanticweb.org/sdm/NegativeReview"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </owl:Class>
+    
+
+
+    <!-- http://www.semanticweb.org/sdm#ShortPaper -->
+
+    <owl:Class rdf:about="http://www.semanticweb.org/sdm#ShortPaper">
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm#RejectedPaper"/>
+        <owl:disjointWith rdf:resource="http://www.semanticweb.org/sdm/ShortPaper"/>
+    </owl:Class>
     
 
 
@@ -483,7 +543,7 @@
     <!-- http://www.semanticweb.org/sdm/DemoPaper -->
 
     <owl:Class rdf:about="http://www.semanticweb.org/sdm/DemoPaper">
-        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm/AcceptedPaper"/>
+        <rdfs:subClassOf rdf:resource="http://www.semanticweb.org/sdm#RejectedPaper"/>
     </owl:Class>
     
 
@@ -759,10 +819,19 @@
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
-            <rdf:Description rdf:about="http://www.semanticweb.org/sdm/DemoPaper"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sdm#DemoPaper"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/sdm/FullPaper"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/sdm/Poster"/>
             <rdf:Description rdf:about="http://www.semanticweb.org/sdm/ShortPaper"/>
+        </owl:members>
+    </rdf:Description>
+    <rdf:Description>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
+        <owl:members rdf:parseType="Collection">
+            <rdf:Description rdf:about="http://www.semanticweb.org/sdm#FullPaper"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sdm#Poster"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sdm#ShortPaper"/>
+            <rdf:Description rdf:about="http://www.semanticweb.org/sdm/DemoPaper"/>
         </owl:members>
     </rdf:Description>
     <rdf:Description>

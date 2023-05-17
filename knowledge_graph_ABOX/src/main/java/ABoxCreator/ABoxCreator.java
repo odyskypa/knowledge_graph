@@ -1,7 +1,5 @@
 package ABoxCreator;
-import org.apache.jena.ontology.OntDocumentManager;
-import org.apache.jena.ontology.OntModel;
-import org.apache.jena.ontology.OntModelSpec;
+import org.apache.jena.ontology.*;
 import org.apache.jena.rdf.model.*;
 import org.apache.jena.vocabulary.OWL;
 import org.apache.jena.vocabulary.RDF;
@@ -13,28 +11,8 @@ import java.util.List;
 import java.util.Set;
 
 public class ABoxCreator {
-    public static OntModel loadTBoxFromResource(String resourcePath) {
 
-        // Get the input stream for the resource file
-        InputStream in = ABoxCreator.class.getResourceAsStream(resourcePath);
-
-        // Create the ontology model
-        OntModel tboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
-
-        // Load the ontology from the input stream
-        tboxModel.read(in, null);
-
-        // Close the input stream
-        try {
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return tboxModel;
-    }
-
-    public static void loadABoxData(OntModel aboxModel, String resourcePath, String baseURL, OntModel tboxModel) {
+    public static OntModel loadABoxData(OntModel aboxModel, String resourcePath, String baseURL, OntModel tboxModel) {
         // Load the input stream for the resource file
         InputStream in = ABoxCreator.class.getResourceAsStream(resourcePath);
 
@@ -86,22 +64,65 @@ public class ABoxCreator {
                 Boolean isConference = documentType.equals("Conference");
                 Boolean isAccepted = reviewerDecision.equals("Accepted");
 
-                Resource paper;
+                OntClass paperClass = null;
                 if (paperType.equals("Full_Paper")) {
-                    paper = tboxModel.getResource(baseURL.concat(TBoxVariables.FULL_PAPER));
+                    paperClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.FULL_PAPER));
                 } else if (paperType.equals("Short_Paper")) {
-                    paper = tboxModel.getResource(baseURL.concat(TBoxVariables.SHORT_PAPER));
+                    paperClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.SHORT_PAPER));
                 } else if (paperType.equals("Demo_Paper")) {
-                    paper = tboxModel.getResource(baseURL.concat(TBoxVariables.DEMO_PAPER));
-                } else {
-                    paper = tboxModel.getResource(baseURL.concat(TBoxVariables.POSTER));
+                    paperClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.DEMO_PAPER));
+                } else if (paperType.equals("Poster")) {
+                    paperClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.POSTER));
                 }
 
-                // all papers are considered SubmittedPaper
+                // Get the Ontology classes for creating the individuals below
+
+                OntClass authorClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.AUTHOR));
+                OntClass areaClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.AREA));
+                OntClass venueClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.VENUE));
+                OntClass reviewerClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.REVIEWER));
+
+                OntClass conferenceClass = null;
+                OntClass editorClass = null;
+                OntClass proceedingClass = null;
+                OntClass journalClass = null;
+                OntClass chairClass = null;
+                OntClass volumeClass = null;
+
+                if (isConference){
+                    chairClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.CHAIR));
+                    proceedingClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.CONFERENCE_PROCEEDINGS));
+                    if (conferenceType.equals("Symposium")) {
+                        conferenceClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.SYMPOSIUM));
+                    } else if (conferenceType.equals("Regular_Conference")) {
+                        conferenceClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.REGULAR_CONFERENCE));
+                    } else if (conferenceType.equals("Expert_Group")) {
+                        conferenceClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.EXPERT_GROUP));
+                    } else if (conferenceType.equals("Workshop")) {
+                        conferenceClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.WORKSHOP));
+                    }
+                } else {
+                    journalClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.JOURNAL));
+                    editorClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.EDITOR));
+                    volumeClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.JOURNAL_VOLUME));
+                }
+
+                OntClass posRevClass = null;
+                OntClass negRevClass = null;
+
+                if (isAccepted) {
+                    posRevClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.POSITIVE_REVIEW));
+                } else {
+                    negRevClass = tboxModel.getOntClass(baseURL.concat(TBoxVariables.NEGATIVE_REVIEW));
+                }
+
+
+                // All papers are considered SubmittedPaper
                 // This block refers to all the rows of the same paper.
                 if (paperID.equals(previousPaperID)) {
                     if (isAccepted){
                         if (isConference) {
+                            // In the same papers only add values that are not repeated!
                             System.out.println("Same paper accepted conference");
                         } else{
                             System.out.println("Same paper accepted journal");
@@ -121,47 +142,141 @@ public class ABoxCreator {
                         if (isConference) {
                             System.out.println("New paper accepted conference");
 
-                            // create Author
+                            // Create Class Individuals
+                            // #########################################################################################
 
-                            // create Area
+                            // Create Author Individual
+                            Individual authorIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.AUTHOR).concat( "#").concat(authorID), authorClass);
 
-                            // create Positive Review
+                            // Create Area Individual
+                            Individual areaIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.AREA).concat( "#").concat(areaID), areaClass);
 
-                            // create Venue (sourceID)
+                            // Create Positive Review Individual
+                            Individual posRevIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.POSITIVE_REVIEW).concat( "#").concat(reviewID), posRevClass);
 
-                            // create reviewer 1 and 2
+                            // Create Reviewer 1 and 2 Individuals
+                            Individual rev1Individual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.REVIEWER).concat( "#").concat(reviewer1ID), reviewerClass);
+                            Individual rev2Individual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.REVIEWER).concat( "#").concat(reviewer2ID), reviewerClass);
 
+                            // Create Chair Individual
+                            Individual chairIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.EDITOR).concat( "#").concat(handlerID), chairClass);
 
+                            // Create Conference Proceeding Individual
+                            Individual confProcIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.CONFERENCE_PROCEEDINGS).concat( "#").concat(proceedingVolumeID), proceedingClass);
 
-                            Resource paperIndividual = aboxModel.createResource(paper + "#" + paperID);
+                            // Create Conference Proceeding Individual
+                            Individual conferenceIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.CONFERENCE).concat( "#").concat(sourceID), conferenceClass);
 
-                            paperIndividual.addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_TITLE), paperTitle)
-                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_AUTHOR), authorID)
-                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.IS_RELATED_TO), areaID)
-                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_POSITIVE_REVIEW_SUBMITTED), reviewID)
-                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.IS_SUBMITTED), sourceID)
-                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_REVIEWER), reviewer1ID)
-                                    .addProperty(aboxModel.createProperty(baseURL, TBoxVariables.HAS_REVIEWER), reviewer2ID);
+                            // Create paper Individual
+                            Individual paperIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.DEMO_PAPER).concat( "#").concat(paperID), paperClass);
 
-                            /*// Create an individual for the author and link it to the paper
-                            Resource authorIndividual = aboxModel.createResource(baseURL + "#" + authorID)
-                                    .addProperty(aboxModel.createProperty(baseURL, "authorName"), authorName);
+                            // Create Data & Object Properties
+                            // #########################################################################################
 
-                            // Link the author to the paper
-                            paperIndividual.addProperty(aboxModel.createProperty(baseURL, "hasAuthor"), authorIndividual);
+                            // Create Paper Object Properties
+                            paperIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_TITLE), paperTitle)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_AUTHOR), authorIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PAPER_IS_RELATED_TO), areaIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_POSITIVE_REVIEW_SUBMITTED), posRevIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.IS_SUBMITTED), conferenceIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_REVIEWER), rev1Individual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_REVIEWER), rev2Individual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.INCLUDED_IN_CONFERENCE_PROCEEDINGS), confProcIndividual);
 
-                            paperIndividual.addProperty(aboxModel.createProperty(baseURL, "reviewer1"), reviewer1)
-                                    .addProperty(aboxModel.createProperty(baseURL, "reviewer2"), reviewer2)
-                                    .addProperty(aboxModel.createProperty(baseURL, "handlerID"), handlerID)
-                                    .addProperty(aboxModel.createProperty(baseURL, "handler"), handler)
-                                    .addProperty(aboxModel.createProperty(baseURL, "handlerType"), handlerType)
-                                    .addProperty(aboxModel.createProperty(baseURL, "areaID"), areaID)
-                                    .addProperty(aboxModel.createProperty(baseURL, "areas"), area)
-                                    .addProperty(aboxModel.createProperty(baseURL, "reviewID"), reviewID)
-                                    .addProperty(aboxModel.createProperty(baseURL, "reviewerDecision"), reviewerDecision)
-                                    .addProperty(aboxModel.createProperty(baseURL, "reviewerText"), reviewerText);*/
+                            authorIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), authorName)
+                                            .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_SUBMITTED), paperIndividual);
+
+                            areaIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.AREA_HAS_NAME), area);
+
+                            posRevIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_POSITIVE_DECISION), reviewerDecision)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_TEXT), reviewerText);
+
+                            rev1Individual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), reviewer1)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.SUBMITS_POSITIVE_REVIEW), posRevIndividual);
+
+                            rev2Individual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), reviewer2)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.SUBMITS_POSITIVE_REVIEW), posRevIndividual);;
+
+                            chairIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.CHAIR_ASSIGNS_REVIEWER), rev1Individual)
+                                            .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.CHAIR_ASSIGNS_REVIEWER), rev2Individual)
+                                            .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), handler)
+                                            .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HANDLES_CONFERENCE), conferenceIndividual);
+
+                            // EXPECTING ERROR WITH TYPE INT
+                            confProcIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.CONFERENCE_PROCEEDINGS_HAS_YEAR), String.valueOf(year));
+                            conferenceIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HANDLED_BY_CHAIR), chairIndividual)
+                                                .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.VENUE_HAS_NAME), source)
+                                                .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.VENUE_IS_RELATED_TO), areaIndividual);
+
                         } else{
                             System.out.println("New paper accepted journal");
+
+                            // Create Class Individuals
+                            // #########################################################################################
+
+                            // Create Author Individual
+                            Individual authorIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.AUTHOR).concat( "#").concat(authorID), authorClass);
+
+                            // Create Area Individual
+                            Individual areaIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.AREA).concat( "#").concat(areaID), areaClass);
+
+                            // Create Positive Review Individual
+                            Individual posRevIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.POSITIVE_REVIEW).concat( "#").concat(reviewID), posRevClass);
+
+                            // Create Reviewer 1 and 2 Individuals
+                            Individual rev1Individual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.REVIEWER).concat( "#").concat(reviewer1ID), reviewerClass);
+                            Individual rev2Individual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.REVIEWER).concat( "#").concat(reviewer2ID), reviewerClass);
+
+                            // Create Chair Individual
+                            Individual editorIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.EDITOR).concat( "#").concat(handlerID), editorClass);
+
+                            // Create Conference Proceeding Individual
+                            Individual journalVolIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.CONFERENCE_PROCEEDINGS).concat( "#").concat(proceedingVolumeID), volumeClass);
+
+                            // Create Conference Proceeding Individual
+                            Individual journalIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.CONFERENCE).concat( "#").concat(sourceID), journalClass);
+
+                            // Create paper Individual
+                            Individual paperIndividual = aboxModel.createIndividual(baseURL.concat(TBoxVariables.DEMO_PAPER).concat( "#").concat(paperID), paperClass);
+
+                            // Create Data & Object Properties
+                            // #########################################################################################
+
+                            // Create Paper Object Properties
+                            paperIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_TITLE), paperTitle)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_AUTHOR), authorIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PAPER_IS_RELATED_TO), areaIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_POSITIVE_REVIEW_SUBMITTED), posRevIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.IS_SUBMITTED), journalIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_REVIEWER), rev1Individual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_REVIEWER), rev2Individual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.INCLUDED_IN_JOURNAL_VOLUME), journalVolIndividual);;
+
+                            authorIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), authorName)
+                                            .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_SUBMITTED), paperIndividual);
+
+                            areaIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.AREA_HAS_NAME), area);
+
+                            posRevIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_POSITIVE_DECISION), reviewerDecision)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HAS_TEXT), reviewerText);
+
+                            rev1Individual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), reviewer1)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.SUBMITS_POSITIVE_REVIEW), posRevIndividual);
+
+                            rev2Individual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), reviewer2)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.SUBMITS_POSITIVE_REVIEW), posRevIndividual);;
+
+                            editorIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.CHAIR_ASSIGNS_REVIEWER), rev1Individual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.CHAIR_ASSIGNS_REVIEWER), rev2Individual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.PERSON_HAS_NAME), handler)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HANDLES_JOURNAL), journalIndividual);
+
+                            // EXPECTING ERROR WITH TYPE INT
+                            journalVolIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.JOURNAL_VOLUME_HAS_YEAR), String.valueOf(year));
+                            journalIndividual.addProperty(aboxModel.getProperty(baseURL, TBoxVariables.HANDLED_BY_EDITOR), editorIndividual)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.VENUE_HAS_NAME), source)
+                                    .addProperty(aboxModel.getProperty(baseURL, TBoxVariables.VENUE_IS_RELATED_TO), areaIndividual);
+
                         }
 
                     } else{
@@ -174,18 +289,21 @@ public class ABoxCreator {
                     previousPaperID = paperID;
                 }
             }
+            return aboxModel;
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return aboxModel;
     }
 
-    public static void saveABoxOntology(OntModel aboxModel, String outputPath, String baseURL) {
-        try (OutputStream out = new FileOutputStream(outputPath)) {
-            // Set the base URL for serialization
-            aboxModel.setNsPrefix("", baseURL);
-            aboxModel.write(out, "RDF/XML");
-            System.out.println("ABox ontology saved to: " + outputPath);
-        } catch (IOException e) {
+    public static void saveABoxOntology(OntModel aboxModel, String outputPath) {
+        aboxModel.write(System.out, "RDF/XML-ABBREV"); // Print the Abox model to console
+        try {
+            // Write the Abox model to the output file
+            OutputStream outputStream = new FileOutputStream(outputPath);
+            aboxModel.write(outputStream, "RDF/XML-ABBREV");
+            outputStream.close();
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -393,6 +511,7 @@ public class ABoxCreator {
         public static final String FULL_PAPER = "FullPaper";
         public static final String POSITIVE_REVIEW = "PositiveReview";
         public static final String ACCEPTED_PAPER = "AcceptedPaper";
+        public static final String REJECTED_PAPER = "RejectedPaper";
         public static final String JOURNAL = "Journal";
         public static final String SYMPOSIUM = "Symposium";
         public static final String PERSON = "Person";
