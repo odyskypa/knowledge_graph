@@ -14,14 +14,16 @@ public class Main {
 
         // OLD IMPLEMENTATION
         // Create an empty Ontology model
-        //OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF);
+        OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF);
 
-        // Load the TBox ontology from the resources folder
-        // OntModel tboxModel = ABoxCreator.loadTBoxFromResource("/final_TBOX.rdf", model);
+         // Load the TBox ontology from the resources folder
+         OntModel tboxModel = ABoxCreator.loadTBoxFromResource("/final_TBOX.rdf");
 
-        // Create the ABox ontology
-        // OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF, tboxModel);
+         // Create the ABox ontology
+         OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF, tboxModel);
 
+        /*
+        // Enabled Inference while developing
         String owlFile = "src/main/resources/final_TBOX.rdf";
         OntModel model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF);
         FileManager.get().readModel(model, owlFile);
@@ -33,8 +35,8 @@ public class Main {
         InfModel infModel = ModelFactory.createInfModel(reasoner, model);
 
         // Get the Tbox and Abox models
-        OntModel tboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF, infModel);
-        OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF, infModel);
+        OntModel tboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF, model);
+        OntModel aboxModel = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM_MICRO_RULE_INF, model);*/
 
         // Retrieve the base URL from the TBox ontology
         String baseURL = ABoxCreator.getBaseURL(tboxModel);
@@ -47,7 +49,7 @@ public class Main {
         aboxModel = ABoxCreator.loadABoxData(aboxModel, "/abox_data.csv", baseURL, tboxModel);
 
         // Save the ABox ontology to a file
-        ABoxCreator.saveABoxOntology(aboxModel, "src/main/resources/abox.rdf");
+        ABoxCreator.saveABoxOntology(aboxModel, "src/main/resources/abox.nt");
 
         System.out.println("We have aboxModel!");
     }
