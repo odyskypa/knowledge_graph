@@ -4,12 +4,6 @@ Project of Semantic Data Management (SDM) Course for the `Master in Data Science
 ## Knowledge Graph of Scientific Research Papers 
 This laboratory session focuses on knowledge graphs using the GraphDB database. It is recommended that participants familiarize themselves with RDF Schema, SPARQL specification, and the GraphDB manual before attending.
 
-### What to Deliver
-- Upload **one compressed file** containing all solutions, named according to the `[Group]-[MemberSurname]+.pdf` format.
-- Each section must be clearly structured as per the instructions provided below.
-- Include any assumptions made in the corresponding section.
-- If code is required, attach a file for each section named `[Group]-(SUB)SECTION-[MemberSurname]`.
-
 ### Setup Instructions
 1. **Download and Install GraphDB**:
    - Download from [GraphDB Free](https://www.ontotext.com/products/graphdb/graphdb-free/).
