@@ -20,8 +20,11 @@ This laboratory session focuses on knowledge graphs using the GraphDB database. 
    
 4. **Load DBpedia Data**:
    - Download and unzip TBOX and ABOX data files from DBpedia.
+       - [http://downloads.dbpedia.org/2014/dbpedia_2014.owl.bz2](http://downloads.dbpedia.org/2014/dbpedia_2014.owl.bz2)
+       - [http://downloads.dbpedia.org/2014/en/instance_types_en.nt.bz2](http://downloads.dbpedia.org/2014/en/instance_types_en.nt.bz2)
    - Create a repository with inference set to `RDFS-Plus (Optimized)`.
-   - Import data into GraphDB using the specified base IRI and target graph settings.
+   - Import data into GraphDB using the specified base IRI: `http://dbpedia.org/resource/`.
+   - Click on `Setup` and activate `Autocomplete`.
 
 ### Session Activities
 #### A. Exploring DBpedia
