@@ -1,10 +1,9 @@
-# Semantic Data Management
+# Knowledge Graph Design of Scientific Research Papers
 Project of Semantic Data Management (SDM) Course for the `Master in Data Science` Program of Universitat Politècnica de Catalunya (UPC)
 ***
-## Knowledge Graph of Scientific Research Papers 
 This laboratory session focuses on knowledge graphs using the GraphDB database. It is recommended that participants familiarize themselves with `RDF Schema`[^1], `SPARQL`[^2] specification, and the `GraphDB`[^3] manual before attending.
 
-### Setup Instructions
+## Setup Instructions
 1. **Download and Install GraphDB**:
    - Download from [GraphDB Free](https://www.ontotext.com/products/graphdb/graphdb-free/).
    - Follow installation steps without altering default settings.
@@ -26,12 +25,12 @@ This laboratory session focuses on knowledge graphs using the GraphDB database. 
    - Import `RDF` data files into GraphDB using the specified base IRI: `http://dbpedia.org/resource/`.
    - Click on `Setup` and activate `Autocomplete`.
 
-### Session Activities
-#### A. Exploring DBpedia
+## Session Activities
+### A. Exploring DBpedia
 - Used GraphDB’s visual interface to explore the `classes` and `properties` within DBpedia.
 - Performed `SPARQL` queries to understand the structure and relationships within the dataset.
 
-#### B. Ontology Creation
+### B. Ontology Creation
 1. **TBOX Definition**:
    - The following text includes the `TBOX` design requirements which needed to be fullfiled by the `Knowledge Graph` design:
         ```
